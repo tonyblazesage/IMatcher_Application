@@ -1,8 +1,14 @@
 {
     "cSpell.words": [
+        "applicationuser",
         "ASPNETCORE",
         "Autoincrement",
+        "currentuser",
+        "hmac",
+        "HMACSHA",
         "imatcherapi",
-        "imatcherapp"
+        "imatcherapp",
+        "signin",
+        "tokendescriptor"
     ]
 }

@@ -5,10 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("imatcherapi/[controller]")]
+    
 
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
         //create an instance of the database in a session to be used to perform logical and business operations
         private readonly DataContext _context;
