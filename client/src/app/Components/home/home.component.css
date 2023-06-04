@@ -1,0 +1,101 @@
+
+
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 0;
+  background-color: #fff;
+  margin-bottom: -50px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #888;
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #5cb85c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.btn2 {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #5bc0de;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 0;
+  background-color: #fff;
+  margin-bottom: -50px;
+}
+
+.feature {
+  text-align: center;
+  margin: 0 20px;
+
+}
+
+.feature h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 16px;
+  color: #333;
+}
+
+footer {
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 50px;
+  /* Adjust the height as needed */
+  background-color: #f5f5f5;
+  /* Set the desired background color */
+}
+
+.footer-content {
+  text-align: center;
+  padding: 15px;
+}
+
+

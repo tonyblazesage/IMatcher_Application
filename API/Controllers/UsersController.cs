@@ -1,12 +1,13 @@
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
     
-
+    [Authorize]
     public class UsersController : BaseApiController
     {
         //create an instance of the database in a session to be used to perform logical and business operations
@@ -16,6 +17,7 @@ namespace API.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
         {

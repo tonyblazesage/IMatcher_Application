@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { User } from './_models/user';
+import { AccountService } from './_services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'IMatcher App';
-  users: any;
 
 
 
-  constructor(private http: HttpClient){}
+  constructor(public accountService: AccountService){}
 
 
   ngOnInit(): void {
-    this.http.get('https://localhost:7001/imatcherapi/users').subscribe({
-      next: response => this.users = response,
-      error: error => console.log(error),
-      complete: () => console.log('Request has completed')
-    })
+    this.setCurrentUser();
+
   }
+
+
+
+  setCurrentUser()
+  {
+    const userstring = localStorage.getItem('user');
+    if(!userstring) return;
+    const user : User = JSON.parse(userstring);
+    this.accountService.setCurrentUser(user);
+  }
+
 
 }

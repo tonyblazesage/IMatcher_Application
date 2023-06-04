@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet');
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+body {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  /* background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(/assets/Images/img/nicepic1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll; */
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

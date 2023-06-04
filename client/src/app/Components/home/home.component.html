@@ -1,0 +1,43 @@
+<div *ngIf="!(accountservice.currentUser$ | async)" style="min-height: 100%;">
+<section class="hero">
+  <h1>Welcome to IMatcher Dating Site</h1>
+  <p>Find your perfect match!</p>
+  <a href="#" class="btn" (click)="registerFormToggler()" style="cursor:pointer;" *ngIf="!registerState">Get Started</a>
+  <a href="#" class="btn2 btn" (click)="registerFormToggler()" style="cursor:pointer;" *ngIf="registerState">Learn More</a>
+</section>
+
+<section class="features" *ngIf="!registerState">
+  <div class="feature">
+    <h2>Easy to Use</h2>
+    <p>Our dating site has a user-friendly interface, making it easy to navigate and find potential matches.</p>
+  </div>
+  <div class="feature">
+    <h2>Advanced Matching Algorithm</h2>
+    <p>We use a powerful algorithm to match you with compatible partners based on your interests and preferences.</p>
+  </div>
+  <div class="feature">
+    <h2>Secure and Private</h2>
+    <p>Your privacy is our top priority. We ensure your personal information is kept safe and confidential.</p>
+  </div>
+
+</section>
+
+<section class="feature" *ngIf="registerState">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <app-sign-up [usersFromHomeComponent]="users"></app-sign-up>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
+
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2023 IMatcher Dating Site. All rights reserved.</p>
+  </div>
+</footer>
+
+
