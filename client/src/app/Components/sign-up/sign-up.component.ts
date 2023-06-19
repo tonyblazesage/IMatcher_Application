@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -6,16 +8,25 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  @Input() usersFromHomeComponent: any;
+
   model: any = {}
-  constructor() { }
+
+  constructor(private accountservice: AccountService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   SignUp()
   {
-    console.log(this.model);
+    this.accountservice.Signup(this.model).subscribe({
+      next: response =>{
+        this.Cancel();
+      },
+    error: error => {
+      this.toastr.error(error.error);
+      console.log(error)
+    }
+    })
   }
 
   Cancel()

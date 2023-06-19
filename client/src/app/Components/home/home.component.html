@@ -1,4 +1,4 @@
-<div *ngIf="!(accountservice.currentUser$ | async)" style="min-height: 100%;">
+<div class="container" *ngIf="!(accountservice.currentUser$ | async)" style="min-height: 100%;">
 <section class="hero">
   <h1>Welcome to IMatcher Dating Site</h1>
   <p>Find your perfect match!</p>
@@ -25,7 +25,7 @@
 <section class="feature" *ngIf="registerState">
   <div class="row justify-content-center">
     <div class="col-4">
-      <app-sign-up [usersFromHomeComponent]="users"></app-sign-up>
+      <app-sign-up></app-sign-up>
     </div>
   </div>
 </section>

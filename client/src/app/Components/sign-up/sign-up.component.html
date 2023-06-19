@@ -1,5 +1,5 @@
 <form #signupForm="ngForm"  (ngSubmit)="SignUp()" autocomplete="off">
-  <h2 class="text-center text-primary">Sign Up</h2>
+  <h1 class="text-center text-primary">Sign Up</h1>
 
   <hr>
 
@@ -12,14 +12,6 @@
     >
   </div>
 
-  <div class="mb-3">
-    <label>Select an existing User</label>
-    <select class="form-select">
-      <option *ngFor="let user of usersFromHomeComponent" [value]="user.username">
-        {{user.userName}}
-      </option>
-    </select>
-  </div>
 
   <div class="mb-3">
     <input type="password" class="form-control" name="password" [(ngModel)]="model.password" placeholder="Password">

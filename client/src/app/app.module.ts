@@ -15,13 +15,22 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { HomeComponent } from './Components/home/home.component';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
+import { MemberListComponent } from './Components/members/member-list/member-list.component';
+import { MemberInfoComponent } from './Components/members/member-info/member-info.component';
+import { ListsComponent } from './Components/lists/lists.component';
+import { MessagesComponent } from './Components/messages/messages.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    SignUpComponent
+    SignUpComponent,
+    MemberListComponent,
+    MemberInfoComponent,
+    ListsComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +41,16 @@ import { SignUpComponent } from './Components/sign-up/sign-up.component';
     FontAwesomeModule,
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      easing: 'ease-in',
+      progressBar: true,
+      progressAnimation: 'increasing',
+      }
+    ),
     NgbModule
   ],
   providers: [],

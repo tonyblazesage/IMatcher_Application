@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -16,7 +17,7 @@ export class NavbarComponent implements OnInit {
   currentUser$ : Observable<User | null> = of(null);
   isCollapsed = false;
 
-  constructor(private http: HttpClient, public accountservice: AccountService, private offcanvasService: NgbOffcanvas){}
+  constructor(private http: HttpClient, public accountservice: AccountService, private router: Router, private toastr: ToastrService){}
 
 
   ngOnInit(): void {
@@ -35,23 +36,15 @@ export class NavbarComponent implements OnInit {
   login()
   {
     this.accountservice.login(this.model).subscribe({
-      next: response => {
-        this.model = response;
-        console.log(response);
-      },
-      error: error => console.log(error)
+      next: () => this.router.navigateByUrl('/matches'),
+      error: error => this.toastr.error(error.error)
     })
   }
 
   logout(){
-
     this.accountservice.logout();
+    this.router.navigateByUrl('/')
   }
-
-  openTop(content: TemplateRef<any>) {
-		this.offcanvasService.open(content, { position: 'top' });
-	}
-
 
 
 }
