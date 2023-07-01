@@ -29,6 +29,10 @@
           </li>
         </ng-container>
 
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
+        </li>
+
 
 
         <!-- <li class="nav-item dropdown">
@@ -44,7 +48,7 @@
         </li> -->
       </ul>
       <div class="dropdown pt-3 pb-3 pe-4 me-4" *ngIf="(accountservice.currentUser$ | async) as user" dropdown>
-        <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{user.username}}</a>
+        <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{user.username | titlecase}}</a>
         <div class="dropdown-menu mt-2" *dropdownMenu>
           <a href="" class="dropdown-item">Edit Profile</a>
           <a href="" class="dropdown-item" (click)="logout()">Logout</a>
@@ -53,7 +57,7 @@
       <form #loginForm="ngForm" class="d-flex pt-sm-3 pb-sm-3" (ngSubmit)="login()" autocomplete="off" *ngIf="!(accountservice.currentUser$ | async)">
         <input class="form-control me-sm-3 ms-md-0" type="text" name="username" [(ngModel)]="model.username" placeholder="username">
         <input class="form-control ms-sm-3 ms-md-0 me-sm-3 ms-md-0" type="password" name="password" [(ngModel)]="model.password" placeholder="password">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
       </form>
     </div>
   </div>

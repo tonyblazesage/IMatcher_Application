@@ -2,6 +2,7 @@ using System.Text;
 using API.Data;
 using API.Extension_services;
 using API.Interfaces;
+using API.Middleware;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -21,10 +22,16 @@ builder.Services.AddJwtIdentityServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
+    app.UseMiddleware<ExceptionMiddleware>();
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else {
+    app.UseMiddleware<ExceptionMiddleware>();
+    app.UseHsts();
 }
 
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
