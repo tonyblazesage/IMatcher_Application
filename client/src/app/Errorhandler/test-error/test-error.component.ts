@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestErrorComponent implements OnInit {
    baseUrl = 'https://localhost:7001/imatcherapi/';
+   validationErrors: string[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -64,6 +65,7 @@ export class TestErrorComponent implements OnInit {
       },
       error: err => {
         console.log(err);
+        this.validationErrors = err;
       }
     })
   }

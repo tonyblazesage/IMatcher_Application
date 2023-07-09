@@ -39,8 +39,7 @@ export class NavbarComponent implements OnInit {
       next: () => {
         this.router.navigateByUrl('/matches');
         this.toastr.success('Logged in successfully');
-      },
-      error: error => this.toastr.error(error.error)
+      }
     })
   }
 

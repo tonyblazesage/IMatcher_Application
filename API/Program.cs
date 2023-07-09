@@ -44,4 +44,20 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using var scope = app.Services.CreateScope();   //create a scope for the service
+
+var services = scope.ServiceProvider;  //get the service provider
+
+try
+{
+    var context = services.GetRequiredService<DataContext>();  //get the data context
+    await context.Database.MigrateAsync();  //migrate the database and create the database if it does not exist
+    await SeedData.SeedUsers(context);  //seed the data
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();  //get the logger
+    logger.LogError(ex, "An error occured during migration");  //log the error
+}
+
 app.Run();
