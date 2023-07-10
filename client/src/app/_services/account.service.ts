@@ -27,13 +27,17 @@ export class AccountService {
     )
   }
 
+  //set the current user
   setCurrentUser(user: User){
     this.currentUserSource.next(user);
   }
 
   logout()
   {
+    //remove the user from the local storage
     localStorage.removeItem('user');
+
+    //set the current user to null
     this.currentUserSource.next(null);
   }
 
@@ -43,11 +47,14 @@ export class AccountService {
       map(user => {
         if(user)
         {
+          //store the user in the local storage
           localStorage.setItem('user', JSON.stringify(user));
+
+          //set the current user
           this.currentUserSource.next(user);
         }
 
-        return user;
+        return user; //return the user
       })
     )
 
