@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="cards">
+    <div class="card mb-4 col-lg-12 col-sm-12" *ngIf="member">
+      <div class="card-img-wrapper">
+        <img src="{{member.photoUrl}}" alt="{{member.knownAs}}"
+          class="card-img-top img-fluid">
+
+
+        <ul class="list-inline member-icons animate text-center">
+          <li class="list-inline-item">
+            <button class="btn btn-primary"><i class="fa fa-user"></i></button>
+          </li>
+          <li class="list-inline-item">
+            <button class="btn btn-primary"><i class="fa fa-envelope"></i></button>
+          </li>
+          <li class="list-inline-item">
+            <button class="btn btn-primary"><i class="fa fa-heart"></i></button>
+          </li>
+
+        </ul>
+      </div>
+
+
+
+      <div class="card-body p-1 mt-2">
+        <h6 class="card-title text-center mb-1" style="font-size: 12px;"><i class="fa fa-user me-1"
+            style="color: green; font-size: 12px;"></i>
+          <strong class="ms-1">Full Name: </strong> {{member.knownAs}}
+        </h6>
+      </div>
+
+
+    </div>
+  </div>
+</div>

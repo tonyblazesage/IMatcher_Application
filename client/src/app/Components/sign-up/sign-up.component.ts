@@ -20,6 +20,7 @@ export class SignUpComponent implements OnInit {
   {
     this.accountservice.Signup(this.model).subscribe({
       next: response =>{
+
         this.Cancel();
       },
     error: error => {

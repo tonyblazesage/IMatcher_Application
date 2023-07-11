@@ -1,18 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = 'https://localhost:7001/imatcherapi/';
+  baseUrl = environment.apiUrl; //get the base url from the environment file
+
+
    //union type where a thing can have a an initial value or can be null
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
   login(model: any)
   {
@@ -52,6 +57,12 @@ export class AccountService {
 
           //set the current user
           this.currentUserSource.next(user);
+
+
+          //navigate to the matches page
+          this.router.navigateByUrl('/matches');
+
+          this.toastr.success('Signup successful');
         }
 
         return user; //return the user
