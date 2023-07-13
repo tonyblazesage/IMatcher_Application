@@ -1,1 +1,131 @@
-<p>member-info works!</p>
+<div class="container-xl px-4 mt-4 mb-xl-4" *ngIf="member">
+  <div class="row">
+      <div class="col-4">
+        <!-- Profile picture card-->
+        <div class="card mb-4 mb-xl-0">
+          <div class="card-header">Details</div>
+          <div class="card-body">
+            <!-- Profile picture image-->
+            <div class="text-center">
+              <img class="img-account-profile rounded-circle mb-2" src="{{member.photoUrl || './assets/user.png'}}"
+                alt="{{member.knownAs}}">
+              <!-- Profile picture help block-->
+
+              <mat-divider></mat-divider>
+            </div>
+
+
+            <div class="row mb-3 mt-3"><label class="col-lg-4 fw-bold text-muted">Name</label>
+              <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.knownAs}}</span></div>
+            </div>
+            <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Age</label>
+              <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.age}}</span></div>
+            </div>
+            <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Gender</label>
+              <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.gender}}</span></div>
+            </div>
+
+
+            <div class="row mb-7"><label class="col-lg-4 fw-bold text-muted">Member Since: </label>
+              <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.created}}</span></div>
+            </div>
+
+
+          </div>
+          <div class="card-footer">
+            <div class="btn-group d-flex">
+              <button class="btn" style="font-size: 40px; width: 30px; color: gold;"><i class="fa fa-envelope"></i></button>
+              <button class="btn" style="font-size: 40px; width: 30px; color: red;"><i class="fa fa-heart"></i></button>
+            </div>
+          </div>
+          <hr>
+          <div class="small font-italic text-muted mb-4 text-center">last active: {{member.lastActive}}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-8">
+        <tabset class="member-tabset">
+          <!--Account information tab-->
+          <tab heading="{{member.knownAs}} Information">
+            <div class="row">
+
+
+
+
+              <!--Account details card-->
+              <div class="col-xl-8">
+                <!-- Account details card-->
+
+
+                  <div class="card-body">
+                    <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Location</label>
+                      <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.country}},
+                          {{member.city}}</span></div>
+                    </div>
+
+                    <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Description</label>
+                      <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.introduction}}</span></div>
+                    </div>
+
+                    <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Looking For</label>
+                      <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.lookingFor}}</span></div>
+                    </div>
+
+                    <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Interests</label>
+                      <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.interests}}</span></div>
+                    </div>
+
+
+
+
+                  </div>
+
+              </div>
+            </div>
+          </tab>
+
+          <!--Photos-->
+          <tab heading="Photos">
+            <div class="row">
+              <div class="col-lg-8">
+                <!-- upload photos card-->
+
+                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+
+
+              </div>
+
+            </div>
+
+          </tab>
+
+          <!--Messages-->
+          <tab heading="Messages">
+            <div class="row">
+              <div class="col-lg-8">
+                <!-- upload photos card-->
+                <div class="card mb-4">
+                  <div class="card-header">Messages</div>
+                  <div class="card-body">
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </tab>
+
+        </tabset>
+      </div>
+  </div>
+
+
+
+
+
+</div>
+
+
+

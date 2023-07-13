@@ -1,0 +1,157 @@
+<div class="container-xl px-4 mt-4 mb-xl-4" *ngIf="member">
+  <div class="row">
+    <div class="col-4">
+      <!-- Profile picture card-->
+      <div class="card mb-4 mb-xl-0">
+        <div class="card-header">Your Profile</div>
+        <div class="card-body">
+          <!-- Profile picture image-->
+          <div class="text-center">
+            <img class="img-account-profile rounded-circle mb-2" src="{{member.photoUrl || './assets/user.png'}}"
+              alt="{{member.knownAs}}">
+            <!-- Profile picture help block-->
+            <div class="small font-italic text-muted mb-4">JPG or PNG not greater than 5mb </div>
+            <!-- Profile picture upload button-->
+            <button class="btn mb-3 btn-info" type="button" style="color: #ffff;">Upload new
+              image</button>
+            <mat-divider></mat-divider>
+          </div>
+
+
+          <div class="row mb-3 mt-3"><label class="col-lg-4 fw-bold text-muted">Username</label>
+            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.userName}}</span></div>
+          </div>
+          <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Age</label>
+            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.age}}</span></div>
+          </div>
+          <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Gender</label>
+            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.gender}}</span></div>
+          </div>
+
+          <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Last Active: </label>
+            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.lastActive}}</span></div>
+          </div>
+
+          <div class="row mb-7"><label class="col-lg-4 fw-bold text-muted">Member Since: </label>
+            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.created}}</span></div>
+          </div>
+
+
+
+        </div>
+        <div class="card-footer">
+          <div class="btn-group d-flex">
+            <button class="btn btn-success" type="submit" form="profileEditForm" [disabled]="!profileEditForm.dirty" style=" color: #ffff;">Save
+              changes</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-8">
+      <div class="alert alert-info text-center" *ngIf="profileEditForm.dirty">
+        <strong>Information: </strong> Any unsaved changes will be lost
+      </div>
+      <!-- Account details card-->
+      <tabset class="member-tabset">
+        <!--Account information tab-->
+        <tab heading="Edit Information">
+
+              <!--Edit Account details card-->
+
+              <form #profileEditForm="ngForm" id="profileEditForm" (ngSubmit)="updateprofile()" >
+                <div class="gx-3 mb-3">
+                  <!-- Form Group (Description)-->
+
+                    <label class="fs-6 fw-bold mb-1" for="introduction">Description </label>
+                    <textarea [(ngModel)]="member.introduction" class="form-control" id="introduction" type="text" placeholder="introduction"
+                      name="introduction" row="5">
+                      </textarea>
+
+
+                </div>
+
+                <div class="gx-3 mb-3">
+
+                  <!-- Form Group (lookingFor)-->
+
+                    <label class="fs-6 fw-bold mb-2" for="lookingFor">Looking For</label>
+                    <textarea [(ngModel)]="member.lookingFor" class="form-control" id="lookingFor" type="text" placeholder="lookingFor"
+                      name="lookingFor" row="5">
+                    </textarea>
+
+
+                </div>
+
+
+                <div class="gx-3 mb-3">
+
+                  <!-- Form Group (Interest)-->
+
+                    <label class="fs-6 fw-bold mb-2" for="interests">Interests </label>
+                    <textarea [(ngModel)]="member.interests" class="form-control" id="interests" type="text" placeholder="interests"
+                      name="interests" row="5">
+                                    </textarea>
+
+
+                </div>
+
+
+                <h4 class="mt-2 mb-2 fw-bold fs-6">Location Details</h4>
+                <div class="gx-3 mb-3 d-flex flex-row align-items-center">
+
+                  <!-- Form Group (City)-->
+
+                    <label class="fs-6 fw-bold mb-2" for="city">City </label>
+                    <input [(ngModel)]="member.city" class="form-control mx-2" id="city" type="text" placeholder="city" name="city">
+
+
+                  <!-- Form Group (Country)-->
+
+                    <label class="fs-6 fw-bold mb-2" for="country">Country </label>
+                    <input [(ngModel)]="member.country" class="form-control mx-2" id="country" type="text" placeholder="country" name="country">
+
+                </div>
+
+
+
+
+
+              </form>
+
+
+        </tab>
+
+        <!--Photos-->
+        <tab heading="Edit Photos">
+          <div class="row">
+            <div class="col-lg-8">
+              <!-- upload photos card-->
+
+              <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+
+
+            </div>
+
+          </div>
+
+        </tab>
+
+        <!--Messages-->
+
+
+      </tabset>
+    </div>
+  </div>
+
+
+
+
+
+</div>

@@ -62,8 +62,8 @@
       <div class="dropdown pt-3 pb-3 pe-4 me-4" *ngIf="(accountservice.currentUser$ | async) as user" dropdown>
         <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{user.username | titlecase}}</a>
         <div class="dropdown-menu mt-2" *dropdownMenu>
-          <a href="" class="dropdown-item">Edit Profile</a>
-          <a href="" class="dropdown-item" (click)="logout()">Logout</a>
+          <a routerLink="profile/edit" class="dropdown-item">Edit Profile</a>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
       </div>
       <form #loginForm="ngForm" class="d-flex pt-sm-3 pb-sm-3" (ngSubmit)="login()" autocomplete="off" *ngIf="!(accountservice.currentUser$ | async)">

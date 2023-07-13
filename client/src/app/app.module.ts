@@ -23,6 +23,7 @@ import { NotFoundComponent } from './Errorhandler/not-found/not-found.component'
 import { ServerErrorComponent } from './Errorhandler/server-error/server-error.component';
 import { MemberCardComponent } from './Components/members/member-list/member-card/member-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { MemberEditComponent } from './Components/members/member-edit/member-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     TestErrorComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
