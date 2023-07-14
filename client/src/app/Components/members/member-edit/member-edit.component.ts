@@ -19,7 +19,10 @@ export class MemberEditComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
 
+  // get the form
   @ViewChild('profileEditForm') profileEditForm: NgForm | undefined;
+
+  // prevent the user from closing the tab
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if(this.profileEditForm?.dirty) {
       $event.returnValue = true;
@@ -47,6 +50,7 @@ export class MemberEditComponent implements OnInit {
     ];
   }
 
+  // get the images
   getImages() {
     if (!this.member) return []; //if member is undefined, return empty array
     const imageUrls = [];
@@ -61,6 +65,7 @@ export class MemberEditComponent implements OnInit {
     return imageUrls;
   }
 
+  // load the member
   loadMember() {
     if(!this.user) return;
     this.memberService.getMember(this.user.username).subscribe({
@@ -71,12 +76,19 @@ export class MemberEditComponent implements OnInit {
     });
   }
 
-
+  // update the profile
   updateprofile()
   {
-    console.log(this.member);
-    this.toastr.success('Profile updated successfully');
-    this.profileEditForm?.reset(this.member);
+    this.memberService.updateUser(this.profileEditForm?.value).subscribe({
+      next: () => {
+        this.toastr.success('Profile updated successfully');
+        this.profileEditForm?.reset(this.member);
+      },
+      error: error => {
+        this.toastr.error(error);
+      }
+    })
+
   }
 
 }
