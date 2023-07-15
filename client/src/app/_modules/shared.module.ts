@@ -52,7 +52,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 //ngb-bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
-import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 
@@ -88,7 +89,8 @@ import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
     NgxGalleryModule,
     NgxSpinnerModule.forRoot({
       type: 'square-jelly-box',
-    })
+    }),
+    FileUploadModule
   ],
   exports: [
     FontAwesomeModule,
@@ -102,7 +104,8 @@ import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
     MatDividerModule,
     TabsModule,
     NgxGalleryModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FileUploadModule
   ],
 })
 export class SharedModule { }

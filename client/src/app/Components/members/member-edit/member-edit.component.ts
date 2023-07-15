@@ -45,7 +45,9 @@ export class MemberEditComponent implements OnInit {
         imagePercent: 100,
         thumbnailsColumns: 4,
         imageAnimation: 'slide',
-        preview: false
+        preview: false,
+        arrowPrevIcon: 'fa fa-arrow-circle-left',
+        arrowNextIcon: 'fa fa-arrow-circle-right',
       }
     ];
   }

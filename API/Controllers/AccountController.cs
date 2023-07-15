@@ -55,7 +55,9 @@ namespace API.Controllers
         [HttpPost("signin")]
         public async Task<ActionResult<UserJwtDto>> SignIn(SignInDto signinDto)
         {
-            var currentuser = await _context.Users.SingleOrDefaultAsync(x => x.UserName == signinDto.Username.ToLower());
+            var currentuser = await _context.Users
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.UserName == signinDto.Username.ToLower());
 
 
             //if user does not exist, return unauthorised
@@ -76,7 +78,8 @@ namespace API.Controllers
             return new UserJwtDto
             {
                 Username = currentuser.UserName,
-                Token = _tokenService.CreateToken(currentuser)
+                Token = _tokenService.CreateToken(currentuser),
+                PhotoUrl = currentuser.Photos.FirstOrDefault(x => x.IsMain)?.Url
             };
         }
 

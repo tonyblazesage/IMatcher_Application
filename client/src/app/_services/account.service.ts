@@ -25,8 +25,7 @@ export class AccountService {
       map((response: User)=>{
         const user = response;
         if(user){
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
       })
     )
@@ -34,6 +33,10 @@ export class AccountService {
 
   //set the current user
   setCurrentUser(user: User){
+    //store the user in the local storage
+    localStorage.setItem('user', JSON.stringify(user));
+
+    //set the current user
     this.currentUserSource.next(user);
   }
 
@@ -52,12 +55,8 @@ export class AccountService {
       map(user => {
         if(user)
         {
-          //store the user in the local storage
-          localStorage.setItem('user', JSON.stringify(user));
 
-          //set the current user
-          this.currentUserSource.next(user);
-
+          this.setCurrentUser(user);
 
           //navigate to the matches page
           this.router.navigateByUrl('/matches');

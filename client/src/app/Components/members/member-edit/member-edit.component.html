@@ -10,10 +10,7 @@
             <img class="img-account-profile rounded-circle mb-2" src="{{member.photoUrl || './assets/user.png'}}"
               alt="{{member.knownAs}}">
             <!-- Profile picture help block-->
-            <div class="small font-italic text-muted mb-4">JPG or PNG not greater than 5mb </div>
-            <!-- Profile picture upload button-->
-            <button class="btn mb-3 btn-info" type="button" style="color: #ffff;">Upload new
-              image</button>
+            
             <mat-divider></mat-divider>
           </div>
 
@@ -130,16 +127,9 @@
 
         <!--Photos-->
         <tab heading="Edit Photos">
-          <div class="row">
-            <div class="col-lg-8">
+
               <!-- upload photos card-->
-
-              <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
-
-
-            </div>
-
-          </div>
+              <app-photo-editor [member]="member"></app-photo-editor>
 
         </tab>
 
