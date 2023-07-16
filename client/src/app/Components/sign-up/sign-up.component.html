@@ -1,20 +1,41 @@
-<form #signupForm="ngForm"  (ngSubmit)="SignUp()" autocomplete="off">
+<form [formGroup]="signupForm" (ngSubmit)="SignUp()" autocomplete="off">
   <h1 class="text-center text-primary">Sign Up</h1>
 
   <hr>
 
   <div class="mb-3">
-    <input type="text"
-      class="form-control"
-      name="username"
-      [(ngModel)]="model.username"
-      placeholder="Username"
-    >
+    <input autocomplete="off" type="text"
+      [class.is-invalid]="signupForm.get('username')?.errors && signupForm.get('username')?.touched"
+      class="form-control" formControlName="username" placeholder="Username">
+    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('username')?.hasError('required')">Username is
+      required</div>
+    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('username')?.hasError('minlength')">Username must be
+      at least 4 characters</div>
   </div>
 
 
   <div class="mb-3">
-    <input type="password" class="form-control" name="password" [(ngModel)]="model.password" placeholder="Password">
+    <input type="password"
+      [class.is-invalid]="signupForm.get('password')?.errors && signupForm.get('password')?.touched"
+      class="form-control" name="password" formControlName="password" placeholder="Password">
+    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('password')?.hasError('required')">Password is
+      required
+    </div>
+    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('password')?.hasError('minlength')">Password must be
+      at least 6 characters</div>
+  </div>
+
+  <div class="mb-3">
+    <input type="password"
+      [class.is-invalid]="signupForm.get('confirmPassword')?.errors && signupForm.get('confirmPassword')?.touched"
+      class="form-control" name="confirmPassword" formControlName="confirmPassword" placeholder="Confirm password">
+    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('confirmPassword')?.hasError('required')">Confirm
+      Password is
+      required
+    </div>
+    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('confirmPassword')?.hasError('isMatching')">Confirm
+      Password and Password
+      do not match</div>
   </div>
 
   <div class="text-center">
@@ -22,3 +43,5 @@
     <button class="btn btn-warning me-2" type="button" (click)="Cancel()">Cancel</button>
   </div>
 </form>
+
+
