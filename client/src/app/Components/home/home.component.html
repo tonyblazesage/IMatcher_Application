@@ -1,9 +1,8 @@
-<div class="container-xl px-4 mt-4 mb-xl-4" *ngIf="!(accountservice.currentUser$ | async)" style="min-height: 100%;">
-<section class="hero">
+<div class="container-xl px-4 mt-3 mb-4" *ngIf="!(accountservice.currentUser$ | async)" style="height: 100%;">
+<section class="hero" *ngIf="!registerState">
   <h1>Welcome to IMatcher Dating Site</h1>
   <p>Find your perfect match!</p>
   <a href="#" class="btn" (click)="registerFormToggler()" style="cursor:pointer;" *ngIf="!registerState">Get Started</a>
-  <a href="#" class="btn2 btn" (click)="registerFormToggler()" style="cursor:pointer;" *ngIf="registerState">Learn More</a>
 </section>
 
 <section class="features" *ngIf="!registerState">
@@ -22,9 +21,11 @@
 
 </section>
 
-<section class="feature" *ngIf="registerState">
+<section class="signup-box" *ngIf="registerState">
+  <a (click)="registerFormToggler()" class="previous mb-3" style="cursor:pointer;">Learn More</a>
+
   <div class="row justify-content-center">
-    <div class="col-4">
+    <div class="col-5">
       <app-sign-up></app-sign-up>
     </div>
   </div>

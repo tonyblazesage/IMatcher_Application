@@ -8,7 +8,8 @@ ul , li, a {
 }
 
 img{
-  max-height: 30px;
+  max-height: 32px;
+  width: 32px;
   border: 2px solid #fff;
   display: inline;
   border-radius: 50%;

@@ -47,6 +47,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 //ngb-bootstrap
@@ -90,6 +91,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     NgxSpinnerModule.forRoot({
       type: 'square-jelly-box',
     }),
+    BsDatepickerModule.forRoot(),
     FileUploadModule
   ],
   exports: [
@@ -103,6 +105,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FontAwesomeModule,
     MatDividerModule,
     TabsModule,
+    BsDatepickerModule,
     NgxGalleryModule,
     NgxSpinnerModule,
     FileUploadModule

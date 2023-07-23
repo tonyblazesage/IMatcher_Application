@@ -1,47 +1,53 @@
-<form [formGroup]="signupForm" (ngSubmit)="SignUp()" autocomplete="off">
-  <h1 class="text-center text-primary">Sign Up</h1>
+<form [formGroup]="signupForm" name="signupForm" (ngSubmit)="SignUp()" autocomplete="off">
+  <h1 class="text-center fs-1 fw-bold mb-2" style="color: #008000;">Sign Up</h1>
 
   <hr>
 
-  <div class="mb-3">
-    <input autocomplete="off" type="text"
-      [class.is-invalid]="signupForm.get('username')?.errors && signupForm.get('username')?.touched"
-      class="form-control" formControlName="username" placeholder="Username">
-    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('username')?.hasError('required')">Username is
-      required</div>
-    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('username')?.hasError('minlength')">Username must be
-      at least 4 characters</div>
+  <div class="mb-2 mt-2">
+    <label style="margin-right: 10px">I am a :</label>
+    <label class="form-check-label p-2">
+      <input type="radio" class="form-check-input" value="male" formControlName="gender"><span
+        class="ms-2">Male</span>Male
+    </label>
+    <label class="form-check-label p-2">
+      <input type="radio" class="form-check-input" value="female" formControlName="gender"><span
+        class="ms-2">Female</span>
+    </label>
+    <label class="form-check-label p-2">
+      <input type="radio" class="form-check-input" value="transgendermale" formControlName="gender"><span
+        class="ms-2">Trangender Male</span>
+    </label>
+    <label class="form-check-label p-2" style="margin-left: 10px;">
+      <input type="radio" class="form-check-input" value="transgenderfemale" formControlName="gender"><span
+        class="ms-2">Trangender Female</span>
+    </label>
+    <label class="form-check-label p-2">
+      <input type="radio" class="form-check-input" value="nonbinary" formControlName="gender"><span
+        class="ms-2">Non-Binary</span>
+    </label>
   </div>
 
+  <app-text-input-validators [formControl]="$any(signupForm.controls['username'])" [type]="'text'"
+    [label]="'Username'"></app-text-input-validators>
+  <app-text-input-validators [formControl]="$any(signupForm.controls['knownAs'])" [type]="'text'"
+    [label]="'KnownAs'"></app-text-input-validators>
+  <app-date-picker [formControl]="$any(signupForm.controls['dateOfBirth'])" [label]="'Date of Birth'"
+    [maxDate]="maxDate"></app-date-picker>
+  <app-text-input-validators [formControl]="$any(signupForm.controls['city'])" [type]="'text'"
+    [label]="'City'"></app-text-input-validators>
+  <app-text-input-validators [formControl]="$any(signupForm.controls['country'])" [type]="'text'"
+    [label]="'Country'"></app-text-input-validators>
+  <app-text-input-validators [formControl]="$any(signupForm.controls['password'])" [type]="'password'"
+    [label]="'Password'"></app-text-input-validators>
+  <app-text-input-validators [formControl]="$any(signupForm.controls['confirmPassword'])" [type]="'password'"
+    [label]="'Confirm Password'"></app-text-input-validators>
 
-  <div class="mb-3">
-    <input type="password"
-      [class.is-invalid]="signupForm.get('password')?.errors && signupForm.get('password')?.touched"
-      class="form-control" name="password" formControlName="password" placeholder="Password">
-    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('password')?.hasError('required')">Password is
-      required
-    </div>
-    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('password')?.hasError('minlength')">Password must be
-      at least 6 characters</div>
-  </div>
 
-  <div class="mb-3">
-    <input type="password"
-      [class.is-invalid]="signupForm.get('confirmPassword')?.errors && signupForm.get('confirmPassword')?.touched"
-      class="form-control" name="confirmPassword" formControlName="confirmPassword" placeholder="Confirm password">
-    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('confirmPassword')?.hasError('required')">Confirm
-      Password is
-      required
-    </div>
-    <div class="invalid-feedback text-danger" *ngIf="signupForm.get('confirmPassword')?.hasError('isMatching')">Confirm
-      Password and Password
-      do not match</div>
-  </div>
+
+
 
   <div class="text-center">
-    <button class="btn btn-success me-2" type="submit">Sign Up</button>
-    <button class="btn btn-warning me-2" type="button" (click)="Cancel()">Cancel</button>
+    <button class="btn btn-success me-2 btn-block" style="width: 100px; max-width: 100%;" type="submit">Sign Up</button>
+    <button class="btn btn-warning me-2" type="button" style="width: 100px; max-width: 100%;" (click)="Cancel()">Cancel</button>
   </div>
 </form>
-
-

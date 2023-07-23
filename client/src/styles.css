@@ -80,6 +80,8 @@ body {
 
 .btn{
   border-radius: 5px;
+  width: auto;
+  max-width: 100%;
 }
 
 .btn:hover{

@@ -71,6 +71,13 @@ nav ul li a {
   margin: 0 20px;
 
 }
+.signup-box{
+  text-align: center;
+  margin: 0 20px;
+  padding: 50px 0;
+  background-color: transparent;
+  margin-bottom: -50px;
+}
 
 .feature h2 {
   font-size: 24px;
@@ -99,3 +106,18 @@ footer {
 }
 
 
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #5bc0de;
+  color: #ffff;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
