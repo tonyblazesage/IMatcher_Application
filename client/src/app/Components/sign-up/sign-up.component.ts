@@ -11,15 +11,14 @@ import { AccountService } from 'src/app/_services/account.service';
 export class SignUpComponent implements OnInit {
   @Output() cancelSignUp = () => {};
   signupForm: FormGroup  = new FormGroup({});
-  model: any = {}
   maxDate: Date = new Date();
+  validationErrors: string[] | undefined;
 
-  @ViewChild('signupForm') signupFormDirective: FormGroup | undefined;
   constructor(private accountservice: AccountService, private toastr: ToastrService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.InitForm();
-    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18); //set the max date to 18 years ago
   }
 
   InitForm(){
@@ -49,23 +48,29 @@ export class SignUpComponent implements OnInit {
 
   SignUp()
   {
-    console.log(this.signupForm?.value);
-    // this.accountservice.Signup(this.model).subscribe({
-    //   next: response =>{
+    const dob = this.getDateOnly(this.signupForm.controls['dateOfBirth'].value); //get the date only from the date of birth
+    const signupformvalues = {...this.signupForm.value, dateOfBirth: dob}; //spread the form values and replace the date of birth with the date only
+    this.accountservice.Signup(signupformvalues).subscribe({
+      next: response =>{
 
-    //     this.Cancel();
-    //   },
-    // error: error => {
-    //   this.toastr.error(error.error);
-    //   console.log(error)
-    // }
-    // })
+        this.Cancel();
+      },
+    error: error => {
+      this.validationErrors = error;
+    }
+    })
   }
 
   Cancel()
   {
     this.signupForm?.reset();
 
+  }
+
+  private getDateOnly(dob: string | undefined){
+    if (!dob) return; //if no date is passed, return today's date
+    let thedob = new Date(dob); //convert to date
+    return new Date(thedob.setMinutes(thedob.getMinutes() - thedob.getTimezoneOffset())).toISOString().slice(0, 10)//convert to ISO string and return only the date part
   }
 
 }

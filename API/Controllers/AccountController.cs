@@ -5,6 +5,7 @@ using API.Data;
 using API.Dtos;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -16,8 +17,10 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
-        public AccountController(DataContext context, ITokenService tokenService)
+        private readonly IMapper _mapper;
+        public AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
+            _mapper = mapper;
             _tokenService = tokenService;
             _context = context;
         }
@@ -30,24 +33,27 @@ namespace API.Controllers
 
             if ( await UserUnavailable(signupDto.Username)) return BadRequest("Username is Unavailable");
 
+            var newUser = _mapper.Map<ApplicationUser>(signupDto); 
+
             //using keyword is used to depose the class after use. this method is the same as garbage collection in c
             using var hmac = new HMACSHA512();
 
-            var newUser = new ApplicationUser
-            {
-                UserName = signupDto.Username.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(signupDto.Password)),
-                PasswordSalt = hmac.Key
-            };
+      
+            newUser.UserName = signupDto.Username.ToLower();
+            newUser.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(signupDto.Password));
+            newUser.PasswordSalt = hmac.Key;
+            
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
 
+            //this part of the code is used to return the userjwtDto to the client (username, token and knownas)
             return new UserJwtDto 
             {
                 Username = newUser.UserName,
-                Token = _tokenService.CreateToken(newUser)
+                Token = _tokenService.CreateToken(newUser),
+                KnownAs = newUser.KnownAs
             };
 
         }
@@ -75,11 +81,13 @@ namespace API.Controllers
                 if (computedHash[i] != currentuser.PasswordHash[i]) return Unauthorized("Incorrect password entered!");
              }
 
+            //this part of the code is used to return the userjwtDto to the client (username, token and knownas)
             return new UserJwtDto
             {
                 Username = currentuser.UserName,
                 Token = _tokenService.CreateToken(currentuser),
-                PhotoUrl = currentuser.Photos.FirstOrDefault(x => x.IsMain)?.Url
+                PhotoUrl = currentuser.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                KnownAs = currentuser.KnownAs
             };
         }
 

@@ -1,4 +1,4 @@
-<form [formGroup]="signupForm" name="signupForm" (ngSubmit)="SignUp()" autocomplete="off">
+<form [formGroup]="signupForm" name="signupForm" (ngSubmit)="signupForm.valid && SignUp()" autocomplete="off">
   <h1 class="text-center fs-1 fw-bold mb-2" style="color: #008000;">Sign Up</h1>
 
   <hr>
@@ -7,7 +7,7 @@
     <label style="margin-right: 10px">I am a :</label>
     <label class="form-check-label p-2">
       <input type="radio" class="form-check-input" value="male" formControlName="gender"><span
-        class="ms-2">Male</span>Male
+        class="ms-2">Male</span>
     </label>
     <label class="form-check-label p-2">
       <input type="radio" class="form-check-input" value="female" formControlName="gender"><span
@@ -42,12 +42,16 @@
   <app-text-input-validators [formControl]="$any(signupForm.controls['confirmPassword'])" [type]="'password'"
     [label]="'Confirm Password'"></app-text-input-validators>
 
-
+  <div class="row" *ngIf="validationErrors">
+    <ul class="text-danger">
+     <li *ngFor="let error of validationErrors">{{error}}</li>
+    </ul>
+  </div>
 
 
 
   <div class="text-center">
-    <button class="btn btn-success me-2 btn-block" style="width: 100px; max-width: 100%;" type="submit">Sign Up</button>
+    <button class="btn btn-success me-2 btn-block" style="width: 100px; max-width: 100%;" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
     <button class="btn btn-warning me-2" type="button" style="width: 100px; max-width: 100%;" (click)="Cancel()">Cancel</button>
   </div>
 </form>
