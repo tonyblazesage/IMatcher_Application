@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
+import { PaginatedResult } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,25 @@ import { Member } from '../_models/member';
 export class MembersService  {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
+  pageinatedResult: PaginatedResult<Member[]> = new PaginatedResult<Member[]>();
 
   constructor(private http: HttpClient) { }
 
   // get all the users
-  getMembers()
+  getMembers(page?: number, itemsPerPage?: number)
   {
-    if(this.members.length > 0) return of (this.members); //if members array is not empty, return it
+    let params = new HttpParams();
+
+    if(page && itemsPerPage)
+    {
+      
+    }
+   // if(this.members.length > 0) return of (this.members); //if members array is not empty, return it
     return this.http.get<Member[]>(this.baseUrl + 'users').pipe(
-      map( (members) => {
-        this.members = members;
-        return members;
-      })
+      // map( (members) => {
+      //   this.members = members;
+      //   return members;
+      // })
     )
   }
 

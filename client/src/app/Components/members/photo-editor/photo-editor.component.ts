@@ -89,9 +89,9 @@ export class PhotoEditorComponent implements OnInit {
         this.member?.photos.push(photo); // push photo to member photos
 
         if(photo.isMain && this.currentUser && this.member){
-          this.currentUser.photoUrl = photo.url;
-          this.member.photoUrl = photo.url;
-          this.accountService.setCurrentUser(this.currentUser);
+          this.currentUser.photoUrl = photo.url; // set the current user photo url
+          this.member.photoUrl = photo.url; // set the member photo url
+          this.accountService.setCurrentUser(this.currentUser); // set the current user photo url
         }
       }
     }

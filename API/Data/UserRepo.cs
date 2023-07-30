@@ -1,5 +1,7 @@
 using API.Dtos;
 using API.Entities;
+using API.Extension_services;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -27,11 +29,14 @@ namespace API.Data
                 .SingleOrDefaultAsync(); // SingleOrDefaultAsync is a method that will find a user by username
         }
 
-        public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+        public async Task<PagedListing<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            return await _context.Users
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                .ToListAsync(); // ToListAsync is a method that will return a list of users
+            var query = _context.Users
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider) // ProjectTo is a method that will project the query to a destination type
+                .AsNoTracking(); // AsNoTracking is a method that will not track changes to the database
+
+                return await PagedListing<MemberDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize); // CreateAsync is a method that will create a new instance of PagedListing
+                
         }
 
         public async Task<ApplicationUser> GetUserByIdAsync(int id)
