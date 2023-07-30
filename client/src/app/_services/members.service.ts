@@ -22,10 +22,25 @@ export class MembersService  {
 
     if(page && itemsPerPage)
     {
-      
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
     }
    // if(this.members.length > 0) return of (this.members); //if members array is not empty, return it
-    return this.http.get<Member[]>(this.baseUrl + 'users').pipe(
+    return this.http.get<Member[]>(this.baseUrl + 'users', {observe: 'response', params}).pipe(
+      map(response => {
+        if (response.body) {
+          this.pageinatedResult.result = response.body;
+        }
+
+        const pagination = response.headers.get('Pagination'); //get the pagination header from the response
+
+        if(pagination)
+        {
+          this.pageinatedResult.pagination = JSON.parse(pagination); //parse the pagination header into a JSON object
+        }
+
+        return this.pageinatedResult;
+      })
       // map( (members) => {
       //   this.members = members;
       //   return members;

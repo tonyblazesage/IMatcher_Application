@@ -55,6 +55,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FileUploadModule } from 'ng2-file-upload';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 
@@ -92,7 +93,8 @@ import { FileUploadModule } from 'ng2-file-upload';
       type: 'square-jelly-box',
     }),
     BsDatepickerModule.forRoot(),
-    FileUploadModule
+    FileUploadModule,
+    PaginationModule.forRoot(),
   ],
   exports: [
     FontAwesomeModule,
@@ -108,7 +110,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     BsDatepickerModule,
     NgxGalleryModule,
     NgxSpinnerModule,
-    FileUploadModule
+    FileUploadModule,
+    PaginationModule
   ],
 })
 export class SharedModule { }

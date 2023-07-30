@@ -26,9 +26,9 @@ export class SignUpComponent implements OnInit {
       gender: ['male'],
       city: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      knownAs: ['', [Validators.required]],
+      knownAs: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
       dateOfBirth: ['', [Validators.required]],
-      username: ['', [Validators.required, Validators.minLength(4)]],
+      username: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
     });

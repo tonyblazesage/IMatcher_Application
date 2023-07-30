@@ -10,7 +10,7 @@ namespace API.Extension_services
         private const int MaxPageSize = 50;
         public int PageNumber { get; set; } = 1; // default value for return first page
 
-        private int _pageSize = 10; // default value for pagesize
+        private int _pageSize = 12; // default value for pagesize
 
         public int PageSize
         {
