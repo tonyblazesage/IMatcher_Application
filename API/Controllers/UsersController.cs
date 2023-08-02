@@ -34,6 +34,19 @@ namespace API.Controllers
     
         public async Task<ActionResult<PagedListing<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
+            var currentUser = await _userrepo.GetUserByUsernameAsync(User.GetUsername()); // Get the current user from the database
+
+            userParams.CurrentUsername = currentUser.UserName; // Set the current username to the username of the current user
+
+            if(string.IsNullOrEmpty(userParams.Gender))
+            {
+                
+                userParams.Gender = currentUser.Gender == "male"  ? "female" : "male";
+            }
+
+
+
+
 
             var users = await _userrepo.GetMembersAsync(userParams); // GetUsersAsync is a method that will return a list of ApplicationUsers
 

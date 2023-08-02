@@ -13,18 +13,7 @@
       <input type="radio" class="form-check-input" value="female" formControlName="gender"><span
         class="ms-2">Female</span>
     </label>
-    <label class="form-check-label p-2">
-      <input type="radio" class="form-check-input" value="transgendermale" formControlName="gender"><span
-        class="ms-2">Trangender Male</span>
-    </label>
-    <label class="form-check-label p-2" style="margin-left: 10px;">
-      <input type="radio" class="form-check-input" value="transgenderfemale" formControlName="gender"><span
-        class="ms-2">Trangender Female</span>
-    </label>
-    <label class="form-check-label p-2">
-      <input type="radio" class="form-check-input" value="non-binary" formControlName="gender"><span
-        class="ms-2">Non-Binary</span>
-    </label>
+    
   </div>
 
   <app-text-input-validators [formControl]="$any(signupForm.controls['username'])" [type]="'text'"

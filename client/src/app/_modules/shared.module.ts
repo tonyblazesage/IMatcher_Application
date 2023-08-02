@@ -48,14 +48,15 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 //ngb-bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FileUploadModule } from 'ng2-file-upload';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 
 
 
@@ -95,6 +96,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     BsDatepickerModule.forRoot(),
     FileUploadModule,
     PaginationModule.forRoot(),
+    TooltipModule.forRoot(),
   ],
   exports: [
     FontAwesomeModule,
@@ -111,7 +113,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     NgxGalleryModule,
     NgxSpinnerModule,
     FileUploadModule,
-    PaginationModule
+    PaginationModule,
+    TooltipModule
   ],
 })
 export class SharedModule { }

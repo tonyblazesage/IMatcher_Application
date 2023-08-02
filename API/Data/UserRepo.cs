@@ -31,11 +31,20 @@ namespace API.Data
 
         public async Task<PagedListing<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            var query = _context.Users
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider) // ProjectTo is a method that will project the query to a destination type
-                .AsNoTracking(); // AsNoTracking is a method that will not track changes to the database
+            var query = _context.Users.AsQueryable(); // AsQueryable is a method that will return a queryable object
 
-                return await PagedListing<MemberDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize); // CreateAsync is a method that will create a new instance of PagedListing
+            query = query.Where(u => u.UserName != userParams.CurrentUsername); // Where is a method that will filter the query and exclude the current user from been returned in the matches list
+
+            query = query.Where(u => u.Gender == userParams.Gender);
+
+
+            //filter according to MinAge and MaxAge
+            var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1); // DateTime.Today is a method that will return the current date
+            var maxDob = DateTime.Today.AddYears(-userParams.MinAge); // DateTime.Today is a method that will return the current date
+
+            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob); 
+
+            return await PagedListing<MemberDto>.CreateAsync(query.AsNoTracking().ProjectTo<MemberDto>(_mapper.ConfigurationProvider), userParams.PageNumber, userParams.PageSize); // CreateAsync is a method that will create a new instance of PagedListing
                 
         }
 

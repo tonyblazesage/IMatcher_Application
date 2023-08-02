@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
+import { User } from 'src/app/_models/user';
+import { UserFilterParams } from 'src/app/_models/userFilterParams';
+import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
@@ -13,10 +16,20 @@ export class MemberListComponent implements OnInit {
   //members$: Observable<Member[]> | undefined; //members array
   members: Member[] | undefined; //members array
   pagination: Pagination | undefined; //pagination object
-  pageNumber = 1; //current page number
-  pageSize = 12; //number of items per page
+  userFilterParams: UserFilterParams | undefined;//user filter params object
+  user: User | undefined; //user object
+  genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }]
 
-  constructor(private memberService: MembersService) { }
+  constructor(private memberService: MembersService, private accounService: AccountService) {
+    this.accounService.currentUser$.pipe().subscribe({
+      next: user => {
+        if(user){
+          this.userFilterParams = new UserFilterParams(user); //create a new user filter params object
+          this.user = user; //get the current user
+        }
+      }
+    })
+   }
 
   ngOnInit(): void {
    //this.members$ = this.memberService.getMembers(); //get the members array
@@ -26,7 +39,8 @@ export class MemberListComponent implements OnInit {
 
   loadMembers()
   {
-    this.memberService.getMembers(this.pageNumber, this.pageSize).subscribe(response => {
+    if(!this.userFilterParams) return; //if the user filter params object is null, return
+    this.memberService.getMembers(this.userFilterParams).subscribe(response => {
       if(response.result && response.pagination)
       {
         this.members = response.result; //get the members array from the response
@@ -36,11 +50,18 @@ export class MemberListComponent implements OnInit {
   }
 
   pageChanged(event: any){
-    if(this.pageNumber !== event.page)
+    if(this.userFilterParams && this.userFilterParams?.pageNumber !== event.page)
     {
-      this.pageNumber = event.page; //get the current page number
+      this.userFilterParams.pageNumber = event.page; //get the current page number
       this.loadMembers(); //load the members array
     }
 
+  }
+
+  reset(){
+    if(this.user){
+      this.userFilterParams = new UserFilterParams(this.user); //create a new user filter params object
+      this.loadMembers(); //load the members array
+    }
   }
 }
