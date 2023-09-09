@@ -13,7 +13,7 @@ export class LoadingService {
   loading(){
     this.loadingRequest++;
     this.spinnerService.show(undefined, {
-      type: 'square-jelly-box',
+      type: 'ball-atom',
       bdColor: 'rgba(0,0,0,0.8)',
       color: '#008000',
   });

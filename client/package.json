@@ -30,6 +30,7 @@
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.3",
     "bootswatch": "^5.2.3",
+    "canvas-confetti": "^1.6.0",
     "font-awesome": "^4.7.0",
     "ng2-file-upload": "^3.0.0",
     "ngx-bootstrap": "^9.0.0",
