@@ -8,13 +8,12 @@ import { MemberListComponent } from './Components/members/member-list/member-lis
 import { MessagesComponent } from './Components/messages/messages.component';
 import { NotFoundComponent } from './Errorhandler/not-found/not-found.component';
 import { ServerErrorComponent } from './Errorhandler/server-error/server-error.component';
-import { TestErrorComponent } from './Errorhandler/test-error/test-error.component';
-import { AuthGuard } from './_Guards/auth.guard';
 import { UnsavedChangesPromptGuard } from './_Guards/unsaved-changes-prompt.guard';
+import { authGuard } from './_Guards/auth.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: '', runGuardsAndResolvers: 'always', canActivate: [AuthGuard], children: [
+  {path: '', runGuardsAndResolvers: 'always', canActivate: [authGuard], children: [
     {path: 'matches', component: MemberListComponent},
     {path: 'matches/:username', component: MemberInfoComponent},
     {path: 'profile/edit', component: MemberEditComponent, canDeactivate: [UnsavedChangesPromptGuard]},

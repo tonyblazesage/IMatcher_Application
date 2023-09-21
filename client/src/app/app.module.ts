@@ -13,7 +13,6 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { HomeComponent } from './Components/home/home.component';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
 import { MemberListComponent } from './Components/members/member-list/member-list.component';
-import { MemberInfoComponent } from './Components/members/member-info/member-info.component';
 import { ListsComponent } from './Components/lists/lists.component';
 import { MessagesComponent } from './Components/messages/messages.component';
 import { SharedModule } from './_modules/shared.module';
@@ -28,6 +27,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './Components/members/photo-editor/photo-editor.component';
 import { TextInputValidatorsComponent } from './_forms/text-input-validators/text-input-validators.component';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
+import { GALLERY_CONFIG, GalleryConfig } from 'ng-gallery';
 
 
 @NgModule({
@@ -37,7 +37,6 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
     HomeComponent,
     SignUpComponent,
     MemberListComponent,
-    MemberInfoComponent,
     ListsComponent,
     MessagesComponent,
     TestErrorComponent,
@@ -61,9 +60,10 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
 
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: GALLERY_CONFIG, useValue: {thumbPosition: 'left', imageSize: 'cover'} as GalleryConfig}
   ],
   bootstrap: [AppComponent]
 })

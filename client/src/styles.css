@@ -87,3 +87,7 @@ body {
 .btn:hover{
   cursor:pointer;
 }
+
+.gallery {
+  height: 600px;
+}

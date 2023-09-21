@@ -19,6 +19,7 @@ export class MemberListComponent implements OnInit {
   userFilterParams: UserFilterParams | undefined;//user filter params object
   user: User | undefined; //user object
   genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }]
+  
 
   constructor(private memberService: MembersService, private accounService: AccountService) {
     this.accounService.currentUser$.pipe().subscribe({

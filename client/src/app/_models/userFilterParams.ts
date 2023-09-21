@@ -6,6 +6,7 @@ export class UserFilterParams {
   maxAge = 99;
   pageNumber = 1;
   pageSize = 12;
+  orderBy = 'lastActive'
 
 
   constructor(user: User){

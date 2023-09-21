@@ -28,6 +28,20 @@
 
     <button class="btn btn-success me-2" type="submit" ngbPopover="Filter" triggers="mouseenter:mouseleave"><i class="fa fa-search" aria-hidden="true"></i></button>
     <button class="btn btn-info" (click)="reset()" ngbPopover="Reset" triggers="mouseenter:mouseleave"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+
+    <div class="d-flex ms-auto">
+      <div class="btn-group float-end">
+        <button class="btn btn-success" name="orderBy" type="button" (click)="loadMembers()" [(ngModel)]="userFilterParams.orderBy" btnRadio="lastActive">
+          Last Active
+        </button>
+
+        <button class="btn btn-success" name="orderBy" type="button" (click)="loadMembers()"
+          [(ngModel)]="userFilterParams.orderBy" btnRadio="created">
+          Newest Members
+        </button>
+      </div>
+    </div>
+
   </form>
 </div>
   <div class="row">

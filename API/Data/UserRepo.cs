@@ -38,13 +38,24 @@ namespace API.Data
             query = query.Where(u => u.Gender == userParams.Gender);
 
 
-            //filter according to MinAge and MaxAge
+            //variable to store max and min age (eg min 18 max is 99)
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1); // DateTime.Today is a method that will return the current date
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge); // DateTime.Today is a method that will return the current date
 
+            //filter according to minimum and maximum date of birth
             query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob); 
 
-            return await PagedListing<MemberDto>.CreateAsync(query.AsNoTracking().ProjectTo<MemberDto>(_mapper.ConfigurationProvider), userParams.PageNumber, userParams.PageSize); // CreateAsync is a method that will create a new instance of PagedListing
+            //filter according to order by
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(created => created.Created), 
+                _ => query.OrderByDescending(lastactive => lastactive.LastActive) 
+            };
+
+            return await PagedListing<MemberDto>.CreateAsync(
+                query.AsNoTracking().ProjectTo<MemberDto>(_mapper.ConfigurationProvider), 
+                userParams.PageNumber, 
+                userParams.PageSize); // CreateAsync is a method that will create a new instance of PagedListing
                 
         }
 
