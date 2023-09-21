@@ -27,7 +27,7 @@
 
 
             <div class="row mb-7"><label class="col-lg-4 fw-bold text-muted">Member Since: </label>
-              <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.created}}</span></div>
+              <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.created | date}}</span></div>
             </div>
 
 
@@ -39,7 +39,7 @@
             </div>
           </div>
           <hr>
-          <div class="small font-italic text-muted mb-4 text-center">last active: {{member.lastActive | date}}
+          <div class="small font-italic text-muted mb-4 text-center">last active: {{member.lastActive | timeago}}
           </div>
         </div>
       </div>
@@ -87,14 +87,11 @@
           </tab>
 
           <!--Photos-->
-          <tab heading="Photos">
+          <tab heading="Photos" #photoTab="tab">
             <div class="row">
               <div class="col-lg-8">
                 <!-- upload photos card-->
-
-                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
-
-
+                <gallery *ngIf="photoTab.active" [items]="images" class="gallery" thumbposition="left"></gallery>
               </div>
 
             </div>

@@ -10,7 +10,7 @@
             <img class="img-account-profile rounded-circle mb-2" src="{{member.photoUrl || './assets/user.png'}}"
               alt="{{member.knownAs}}">
             <!-- Profile picture help block-->
-            
+
             <mat-divider></mat-divider>
           </div>
 
@@ -26,11 +26,11 @@
           </div>
 
           <div class="row mb-3"><label class="col-lg-4 fw-bold text-muted">Last Active: </label>
-            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.lastActive}}</span></div>
+            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.lastActive | timeago}}</span></div>
           </div>
 
           <div class="row mb-7"><label class="col-lg-4 fw-bold text-muted">Member Since: </label>
-            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.created}}</span></div>
+            <div class="col-lg-8"><span class="fw-bolder text-dark">{{member.created | date}}</span></div>
           </div>
 
 

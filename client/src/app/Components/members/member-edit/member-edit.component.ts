@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { Member } from 'src/app/_models/member';
@@ -16,8 +15,7 @@ import { MembersService } from 'src/app/_services/members.service';
 export class MemberEditComponent implements OnInit {
   member: Member | undefined;
   user: User | null = null;
-  galleryOptions: NgxGalleryOptions[] = [];
-  galleryImages: NgxGalleryImage[] = [];
+
 
   // get the form
   @ViewChild('profileEditForm') profileEditForm: NgForm | undefined;
@@ -38,34 +36,23 @@ export class MemberEditComponent implements OnInit {
   ngOnInit(): void {
     this.loadMember();
 
-    this.galleryOptions = [
-      {
-        width: '500px',
-        height: '500px',
-        imagePercent: 100,
-        thumbnailsColumns: 4,
-        imageAnimation: 'slide',
-        preview: false,
-        arrowPrevIcon: 'fa fa-arrow-circle-left',
-        arrowNextIcon: 'fa fa-arrow-circle-right',
-      }
-    ];
+
   }
 
   // get the images
-  getImages() {
-    if (!this.member) return []; //if member is undefined, return empty array
-    const imageUrls = [];
-    for (const photo of this.member.photos) {
-      imageUrls.push({
-        small: photo?.url,
-        medium: photo?.url,
-        big: photo?.url
-      })
-    }
+  // getImages() {
+  //   if (!this.member) return []; //if member is undefined, return empty array
+  //   const imageUrls = [];
+  //   for (const photo of this.member.photos) {
+  //     imageUrls.push({
+  //       small: photo?.url,
+  //       medium: photo?.url,
+  //       big: photo?.url
+  //     })
+  //   }
 
-    return imageUrls;
-  }
+  //   return imageUrls;
+  // }
 
   // load the member
   loadMember() {
@@ -73,7 +60,7 @@ export class MemberEditComponent implements OnInit {
     this.memberService.getMember(this.user.username).subscribe({
       next: member => {
         this.member = member;
-        this.galleryImages = this.getImages();
+       // this.galleryImages = this.getImages();
       }
     });
   }
