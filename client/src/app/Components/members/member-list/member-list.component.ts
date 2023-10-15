@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
 import { User } from 'src/app/_models/user';
@@ -17,19 +17,11 @@ export class MemberListComponent implements OnInit {
   members: Member[] | undefined; //members array
   pagination: Pagination | undefined; //pagination object
   userFilterParams: UserFilterParams | undefined;//user filter params object
-  user: User | undefined; //user object
   genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }]
-  
 
-  constructor(private memberService: MembersService, private accounService: AccountService) {
-    this.accounService.currentUser$.pipe().subscribe({
-      next: user => {
-        if(user){
-          this.userFilterParams = new UserFilterParams(user); //create a new user filter params object
-          this.user = user; //get the current user
-        }
-      }
-    })
+
+  constructor(private memberService: MembersService) {
+    this.userFilterParams = this.memberService.getUserFilterParams();
    }
 
   ngOnInit(): void {
@@ -40,29 +32,32 @@ export class MemberListComponent implements OnInit {
 
   loadMembers()
   {
-    if(!this.userFilterParams) return; //if the user filter params object is null, return
-    this.memberService.getMembers(this.userFilterParams).subscribe(response => {
-      if(response.result && response.pagination)
-      {
-        this.members = response.result; //get the members array from the response
-        this.pagination = response.pagination; //get the pagination object from the response
-      }
-    })
+    if(this.userFilterParams) {
+      this.memberService.setUserFilterParams(this.userFilterParams);
+      this.memberService.getMembers(this.userFilterParams).subscribe(response => {
+        if (response.result && response.pagination) {
+          this.members = response.result; //get the members array from the response
+          this.pagination = response.pagination; //get the pagination object from the response
+        }
+      })
+    }
+
   }
 
   pageChanged(event: any){
     if(this.userFilterParams && this.userFilterParams?.pageNumber !== event.page)
     {
       this.userFilterParams.pageNumber = event.page; //get the current page number
+      this.memberService.setUserFilterParams(this.userFilterParams);
       this.loadMembers(); //load the members array
     }
 
   }
 
   reset(){
-    if(this.user){
-      this.userFilterParams = new UserFilterParams(this.user); //create a new user filter params object
+
+      this.userFilterParams = this.memberService.resetUserFilterParams();
       this.loadMembers(); //load the members array
-    }
+
   }
 }
