@@ -13,9 +13,9 @@ namespace API.Extension_services
             return user.FindFirst(ClaimTypes.Name)?.Value; // ClaimTypes.Name is a class that comes from the System.Security.Claims namespace
         }
 
-        public static string GetUserId(this ClaimsPrincipal user) // ClaimsPrincipal is a class that comes from the System.Security.Claims namespace
+        public static int GetUserId(this ClaimsPrincipal user) // ClaimsPrincipal is a class that comes from the System.Security.Claims namespace
         {
-            return user.FindFirst(ClaimTypes.NameIdentifier)?.Value; // ClaimTypes.Name is a class that comes from the System.Security.Claims namespace
+            return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value); // ClaimTypes.Name is a class that comes from the System.Security.Claims namespace
         }
     }
 }

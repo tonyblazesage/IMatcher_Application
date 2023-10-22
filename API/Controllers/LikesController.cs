@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Dtos;
 using API.Entities;
 using API.Extension_services;
+using API.Helpers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace API.Controllers
         //this basically updated the join table in the database
         public async Task<ActionResult> AddLike(string username)
         {
-            var sourceUserId = int.Parse(User.GetUserId()); //this is contain the source user id
+            var sourceUserId = User.GetUserId(); //this is contain the source user id
             var likedUser = await _userRepo.GetUserByUsernameAsync(username);  //this will contain the liked user
             var sourceUser = await _likesRepo.GetUserWithLikes(sourceUserId);   //this will contain the source user
 
@@ -53,13 +54,15 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LikeDto>>> GetUserLikes(string predicate)
+        public async Task<ActionResult<PagedListing<LikeDto>>> GetUserLikes([FromQuery]LikesParams likesParams)
         {
-            var users = await _likesRepo.GetUserLikes(predicate, int.Parse(User.GetUserId()));
+            likesParams.UserId = User.GetUserId();
+            var users = await _likesRepo.GetUserLikes(likesParams);
 
-          //  Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
 
             return Ok(users);
         }
+          
     }
 }
