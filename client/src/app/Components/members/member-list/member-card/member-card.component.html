@@ -15,7 +15,7 @@
                 class="fa fa-envelope"></i></button>
           </li>
           <li class="list-inline-item">
-            <button class="btn btn-danger fs-5 fs-sm-6" ngbPopover="Like" triggers="mouseenter:mouseleave"><i
+            <button (click)="addlike(member)" class="btn btn-danger fs-5 fs-sm-6" ngbPopover="Like" triggers="mouseenter:mouseleave"><i
                 class="fa fa-heart"></i></button>
           </li>
 
@@ -27,7 +27,7 @@
       <div class="card-body p-1 mt-2">
         <ul>
           <li class="pb-1"><i class="fa fa-user me-1" style="color: green; font-size: 16px;"></i>
-          <span class="ms-2 fw-bolder" style="font-size: 16px;">{{member.knownAs}}, {{member.age}}</span></li>
+          <span class="ms-2 fw-bolder" style="font-size: 16px;">{{member.knownAs}}</span></li>
           <li class="pb-1"><i class="fa fa-map-marker me-1" style="color: green; font-size: 16px;"></i>
           <span class="ms-2 text-muted" style="font-size: 16px;">{{member.city}}</span></li>
         </ul>
