@@ -27,6 +27,9 @@ namespace API.Extension_services
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LoguserActivity>(); // AddScoped means that it will create a new instance of the service for every HTTP request
             services.AddScoped<ILikesRepo, LikesRepo>();
+            services.AddScoped<IMessageRepo, MessageRepo>();
+
+            
             return services;
         }
     }
